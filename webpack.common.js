@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CrittersPlugin = require('critters-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
 
 // Environment constants
 const IS_DEV = process.argv.includes('development');
@@ -99,6 +100,10 @@ module.exports = {
 
         new CrittersPlugin(),
 
-        new InlineSVGPlugin()
+        new InlineSVGPlugin(),
+
+        new InjectManifest({
+            swSrc: './src/serviceWorker.js'
+        })
     ]
 };

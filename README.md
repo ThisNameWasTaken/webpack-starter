@@ -13,6 +13,7 @@
 * It inlines critical styles using [critters](https://www.npmjs.com/package/critters-webpack-plugin)
 * It removes unused css rules using [purgecss](https://www.npmjs.com/package/purgecss-webpack-plugin)
 * It creates a development server using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server)
+* It adds offline support using [webpack-workbox-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
 
 ## Install dependencies
 

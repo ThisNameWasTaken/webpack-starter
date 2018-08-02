@@ -34,14 +34,16 @@ module.exports = {
             // transpile es6 to es5
             test: /\.js$/i,
             exclude: /node_modules/,
-            use: {
+            use: [{
                 loader: 'babel-loader',
                 options: {
                     presets: [
                         ['env', { modules: false /* allow tree shaking */ }]
                     ],
                 }
-            }
+            }, {
+                loader: 'eslint-loader'
+            }]
         }, {
             // transpile sass and autoprefix it
             test: /\.(sass|scss|css)$/i,

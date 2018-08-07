@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CriticalPlugin = require('critical-plugin');
 
 module.exports = merge(commonConfig, {
     mode: 'production',
@@ -56,6 +57,8 @@ module.exports = merge(commonConfig, {
         new PurgecssPlugin({
             paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true })
         }),
+
+        new CriticalPlugin(),
 
         new HashedModuleIdsPlugin()
     ],

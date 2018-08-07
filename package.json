@@ -17,7 +17,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
-    "critters-webpack-plugin": "^1.1.0",
+    "critical-plugin": "^1.0.6",
     "css-loader": "^1.0.0",
     "eslint": "^5.2.0",
     "eslint-loader": "^2.1.0",

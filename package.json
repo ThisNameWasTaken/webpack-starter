@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production --config webpack.prod.js",
+    "postbuild": "node scripts/minifyHtml",
     "start": "webpack-dev-server --open --mode development --config webpack.dev.js"
   },
   "keywords": [],

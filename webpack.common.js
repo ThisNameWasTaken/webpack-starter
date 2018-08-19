@@ -12,7 +12,10 @@ const IS_PROD = !IS_DEV;
 
 module.exports = {
     entry: {
-        main: './src/js/main.js'
+        main: [
+            './src/sass/main.scss',
+            './src/js/main.js'
+        ]
     },
 
     module: {

@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 // Environment constants
 const IS_DEV = process.argv.includes('development');
@@ -31,7 +32,7 @@ module.exports = {
         }, {
             // transpile es6 to es5
             test: /\.js$/i,
-            exclude: /node_modules/,
+            exclude: /node_modules\/(?!(MODULE_THAT_MUST_BE_INCLUDED|ANOTHER_MODULE_THAT_MUST_BE_INCLUDED)\/).*/,
             use: [{
                 loader: 'babel-loader',
                 options: {
@@ -48,21 +49,18 @@ module.exports = {
             use: [{
                 loader: IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader'
             }, {
-                loader: 'css-loader',
-                options: {
-                    sourceMap: true,
-                    minimize: true
-                }
+                loader: 'css-loader'
             }, {
                 loader: 'postcss-loader',
                 options: {
-                    sourceMap: true,
-                    plugins: [require('autoprefixer')({ browsers: ['last 2 versions', '> 1%'] })]
+                    plugins: [
+                        autoprefixer({ browsers: ['last 2 versions', '> 1%'] })
+                    ]
                 }
             }, {
-                loader: 'sass-loader', options: {
-                    sourceMap: true,
-                    includePaths: ['node_modules']
+                loader: 'sass-loader',
+                options: {
+                    includePaths: ['./node_modules']
                 }
             }]
         }, {

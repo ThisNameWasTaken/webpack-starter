@@ -1,6 +1,6 @@
 const path = require('path');
 const glob = require('glob');
-const { DefinePlugin, HashedModuleIdsPlugin } = require('webpack');
+const { DefinePlugin, HashedModuleIdsPlugin, NoEmitOnErrorsPlugin } = require('webpack');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -21,6 +21,7 @@ module.exports = merge(commonConfig, {
         splitChunks: {
             chunks: "all"
         },
+        minimize: true,
         minimizer: [
             new UglifyJsPlugin({
                 parallel: true,
@@ -49,6 +50,8 @@ module.exports = merge(commonConfig, {
         new DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
+
+        new NoEmitOnErrorsPlugin(),
 
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css",

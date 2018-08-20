@@ -18,17 +18,24 @@ module.exports = merge(commonConfig, {
     },
 
     optimization: {
+        splitChunks: {
+            chunks: "all"
+        },
         minimizer: [
             new UglifyJsPlugin({
                 parallel: true,
                 sourceMap: true,
                 uglifyOptions: {
                     mangle: true,
-                    toplevel: false,
+                    toplevel: true,
+                    compress: {
+                        drop_console: true,
+                        dead_code: true,
+                        toplevel: true
+                    },
                     output: {
                         comments: false,
                     },
-                    nameCache: null,
                     ie8: false,
                     keep_classnames: false,
                     keep_fnames: false,

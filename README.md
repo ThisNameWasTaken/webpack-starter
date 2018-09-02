@@ -9,8 +9,8 @@
 * It loads html and imports partials using the [HTMLWeabpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/)
 * It transpiles ES6 code to ES5 using [babel](http://babeljs.io/docs/setup/#installation)
 * It transpiles sass into css using [sass-loader](https://www.npmjs.com/package/sass-loader)
-* It ensures browsercompatility using [autoprefixer](https://www.npmjs.com/package/autoprefixer)
-* It inlines critical styles using [critters](https://www.npmjs.com/package/critters-webpack-plugin)
+* It ensures browser compatility using [autoprefixer](https://www.npmjs.com/package/autoprefixer)
+* It inlines critical styles using the [critical-plugin for webpack](https://www.npmjs.com/package/critical-plugin)
 * It removes unused css rules using [purgecss](https://www.npmjs.com/package/purgecss-webpack-plugin)
 * It creates a development server using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server)
 * It adds offline support using [webpack-workbox-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
@@ -24,7 +24,7 @@ npm install
 ## Start the development server
 
 ```
-npm run dev 
+npm start
 ```
 
 ## Build for production

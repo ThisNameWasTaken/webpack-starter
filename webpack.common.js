@@ -11,24 +11,31 @@ const autoprefixer = require('autoprefixer');
 const IS_DEV = process.argv.includes('development');
 const IS_PROD = !IS_DEV;
 
+const htmlLoaderConfig = {
+    loader: 'html-loader',
+    options: {
+        attrs: [':src', ':data-src', 'source:srcset', 'source:data-srcset'], // load images from html
+        interpolate: true
+    }
+};
+
 module.exports = {
     entry: {
         main: [
-            './src/sass/main.scss',
+            './src/sass/main.sass',
             './src/js/main.js'
         ]
     },
 
     module: {
         rules: [{
-            test: /\.(html)$/i,
-            use: {
-                loader: 'html-loader',
-                options: {
-                    attrs: [':src', ':data-src', 'source:srcset', 'source:data-srcset'], // load images from html
-                    interpolate: true
-                }
-            }
+            test: /\.html$/i,
+            use: htmlLoaderConfig
+        }, {
+            test: /\.pug$/i,
+            use: [htmlLoaderConfig, {
+                loader: 'pug-plain-loader'
+            }]
         }, {
             // transpile es6 to es5
             test: /\.js$/i,
@@ -83,7 +90,7 @@ module.exports = {
         new CleanWebpackPlugin('dist'),
 
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/views/index.pug',
             chunks: ['main']
         }),
 

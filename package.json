@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.prod.js",
     "postbuild": "node scripts/minifyHtml",
-    "start": "webpack-dev-server --open --mode development --config webpack.dev.js"
+    "start": "webpack-dev-server --mode development --config webpack.dev.js"
   },
   "keywords": [],
   "author": "Adrian Dinca",

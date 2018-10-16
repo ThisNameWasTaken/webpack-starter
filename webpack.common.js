@@ -44,7 +44,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: [
-                        ['env', { modules: false /* allow tree shaking */ }]
+                        ['@babel/preset-env', { modules: false /* allow tree shaking */ }]
                     ],
                 }
             }, {

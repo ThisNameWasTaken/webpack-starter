@@ -35,6 +35,29 @@ npm start
 npm run build
 ```
 
+## Deploy do GitHub Pages
+```
+npm run deploy
+```
+It deploys the latest build, found inside the `dist` folder, to the `gh-pages` branch.<br>
+If you would like to automatically build before deploying, go to the `package.json` file and inside `"scripts"` add a `"predeploy"` run the build script.
+
+```diff
+{
+    ...
+
+    "scripts": {
+        "build": "webpack --mode production --config webpack.prod.js",
+        "postbuild": "node scripts/minifyHtml",
++       "predeploy": "npm run build",
+        "deploy": "git add dist/\\* && git commit -m \"chore: Deploy to gh pages\" && git subtree split --prefix dist -b gh-pages && git push --force origin gh-pages && git branch -D gh-pages && git reset HEAD~",
+        "start": "webpack-dev-server --mode development --config webpack.dev.js"
+    },
+
+    ...
+}
+```
+
 ## How to import html files instead of pug files
 Inside an html file add the fallowing code
 

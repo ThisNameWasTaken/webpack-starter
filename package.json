@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.prod.js",
     "postbuild": "node scripts/minifyHtml",
+    "deploy": "git add dist/\\* && git commit -m \"chore: Deploy to gh pages\" && git subtree split --prefix dist -b gh-pages && git push --force origin gh-pages && git branch -D gh-pages && git reset HEAD~",
     "start": "webpack-dev-server --mode development --config webpack.dev.js"
   },
   "keywords": [],

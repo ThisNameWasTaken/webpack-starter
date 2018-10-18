@@ -54,6 +54,9 @@ module.exports = {
                     presets: [
                         ['@babel/preset-env', { modules: false /* allow tree shaking */ }]
                     ],
+                    plugins: [
+                        '@babel/plugin-syntax-dynamic-import'
+                    ]
                 }
             }, {
                 loader: 'eslint-loader'

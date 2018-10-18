@@ -7,6 +7,12 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
+// installed node modules that must be transpiled through babel
+const includedNodeModules = [
+    'MODULE_THAT_MUST_BE_INCLUDED',
+    'ANOTHER_MODULE_THAT_MUST_BE_INCLUDED'
+];
+
 // Environment constants
 const IS_DEV = process.argv.includes('development');
 const IS_PROD = !IS_DEV;
@@ -42,7 +48,7 @@ module.exports = {
         }, {
             // transpile es6 to es5
             test: /\.js$/i,
-            exclude: /node_modules\/(?!(MODULE_THAT_MUST_BE_INCLUDED|ANOTHER_MODULE_THAT_MUST_BE_INCLUDED)\/).*/,
+            exclude: new RegExp(`node_modules/(?!(${includedNodeModules.join('|')})/).*`),
             use: [{
                 loader: 'babel-loader',
                 options: {

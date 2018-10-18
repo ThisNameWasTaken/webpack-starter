@@ -2,7 +2,6 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -96,8 +95,6 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin('dist'),
-
         new HtmlWebpackPlugin({
             template: './src/views/index.pug',
             chunks: ['main']

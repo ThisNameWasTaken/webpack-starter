@@ -8,6 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CriticalPlugin = require('critical-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(commonConfig, {
     mode: 'production',
@@ -47,6 +48,8 @@ module.exports = merge(commonConfig, {
     },
 
     plugins: [
+        new CleanWebpackPlugin('dist'),
+
         new DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),

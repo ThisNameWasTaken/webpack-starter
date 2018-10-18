@@ -1,4 +1,4 @@
-const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -11,6 +11,9 @@ const autoprefixer = require('autoprefixer');
 const IS_DEV = process.argv.includes('development');
 const IS_PROD = !IS_DEV;
 
+const sassPath = './src/sass/main.sass';
+const scssPath = sassPath.replace(/\.sass$/g, '.scss');
+
 const htmlLoaderConfig = {
     loader: 'html-loader',
     options: {
@@ -22,7 +25,7 @@ const htmlLoaderConfig = {
 module.exports = {
     entry: {
         main: [
-            './src/sass/main.sass',
+            fs.existsSync(sassPath) ? sassPath : scssPath,
             './src/js/main.js'
         ]
     },

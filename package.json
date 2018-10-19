@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.prod.js",
     "postbuild": "node scripts/minifyHtml",
-    "deploy": "git add dist/\\* && git commit -m \"chore: Deploy to gh pages\" && git subtree split --prefix dist -b gh-pages && git push --force origin gh-pages && git branch -D gh-pages && git reset HEAD~",
+    "deploy": "gh-pages -d dist -m \"chore: Deploy to gh pages\"",
     "start": "webpack-dev-server --mode development --config webpack.dev.js"
   },
   "keywords": [],
@@ -45,5 +45,8 @@
     "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.4",
     "workbox-webpack-plugin": "^3.6.2"
+  },
+  "dependencies": {
+    "gh-pages": "^2.0.1"
   }
 }

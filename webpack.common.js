@@ -31,6 +31,7 @@ module.exports = {
     entry: {
         main: [
             fs.existsSync(sassPath) ? sassPath : scssPath,
+            'regenerator-runtime/runtime',
             './src/js/main.js'
         ]
     },

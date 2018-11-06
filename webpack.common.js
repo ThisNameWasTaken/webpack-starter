@@ -46,6 +46,11 @@ module.exports = {
                 loader: 'pug-plain-loader'
             }]
         }, {
+            test: /\.ejs$/i,
+            use: [htmlLoaderConfig, {
+                loader: 'ejs-plain-loader'
+            }]
+        }, {
             // transpile es6 to es5
             test: /\.js$/i,
             exclude: new RegExp(`node_modules/(?!(${includedNodeModules.join('|')})/).*`),

@@ -4,7 +4,9 @@ const InlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
+const PwaManifestWebpackPlugin = require('pwa-manifest-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const path = require('path');
 
 // installed node modules that must be transpiled through babel
 const includedNodeModules = [
@@ -118,6 +120,19 @@ module.exports = {
 
         new InjectManifest({
             swSrc: './src/serviceWorker.js'
+        }),
+
+        new PwaManifestWebpackPlugin({
+            short_name: "Jokr",
+            name: "Jokr",
+            icon: {
+                src: path.resolve('src/icons/launcher-icon-512x512.png'),
+                sizes: [512, 256, 192, 152, 144, 128]
+            },
+            start_url: "/index.html",
+            display: "standalone",
+            theme_color: "#3f51b5",
+            background_color: "#3f51b5"
         })
     ]
 };

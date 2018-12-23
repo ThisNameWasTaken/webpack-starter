@@ -1,6 +1,5 @@
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
@@ -92,16 +91,10 @@ module.exports = {
             }]
         }, {
             // load images
-            test: /\.(png|jpe?g|gif|webp)$/i,
+            test: /\.(png|jpe?g|svg|gif|webp)$/i,
             use: [{
                 loader: 'url-loader',
                 options: { limit: 8192 }
-            }]
-        }, {
-            test: /\.svg$/i,
-            use: [{
-                loader: 'url-loader',
-                options: { limit: 1 }
             }]
         }]
     },
@@ -116,8 +109,6 @@ module.exports = {
             defaultAttribute: 'async'
         }),
 
-        new InlineSVGPlugin(),
-
         new InjectManifest({
             swSrc: './src/serviceWorker.js'
         }),
@@ -126,7 +117,7 @@ module.exports = {
             short_name: "Jokr",
             name: "Jokr",
             icon: {
-                src: path.resolve('src/icons/launcher-icon-512x512.png'),
+                src: path.resolve('src/icons/launcher-icon.png'),
                 sizes: [512, 256, 192, 152, 144, 128]
             },
             start_url: "/index.html",

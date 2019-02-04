@@ -11,70 +11,54 @@ const CriticalPlugin = require('critical-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(commonConfig, {
-    mode: 'production',
+  mode: 'production',
 
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[chunkhash].js'
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[chunkhash].js'
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: "all"
     },
+    minimize: true,
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+        sourceMap: true,
+      }),
+    ]
+  },
 
-    optimization: {
-        splitChunks: {
-            chunks: "all"
-        },
-        minimize: true,
-        minimizer: [
-            new UglifyJsPlugin({
-                parallel: true,
-                sourceMap: true,
-                uglifyOptions: {
-                    mangle: true,
-                    toplevel: true,
-                    compress: {
-                        drop_console: true,
-                        dead_code: true,
-                        toplevel: true
-                    },
-                    output: {
-                        comments: false,
-                    },
-                    ie8: false,
-                    keep_classnames: false,
-                    keep_fnames: false,
-                    safari10: false,
-                }
-            })
-        ]
-    },
+  plugins: [
+    new CleanWebpackPlugin('dist'),
 
-    plugins: [
-        new CleanWebpackPlugin('dist'),
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
 
-        new DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
+    new NoEmitOnErrorsPlugin(),
 
-        new NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
+    }),
 
-        new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css",
-            chunkFilename: "[id].[contenthash].css",
-        }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        map: { inline: false }
+      }
+    }),
 
-        new OptimizeCssAssetsPlugin({
-            cssProcessorOptions: {
-                map: { inline: false }
-            }
-        }),
+    new PurgecssPlugin({
+      paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true })
+    }),
 
-        new PurgecssPlugin({
-            paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true })
-        }),
+    new CriticalPlugin(),
 
-        new CriticalPlugin(),
+    new HashedModuleIdsPlugin()
+  ],
 
-        new HashedModuleIdsPlugin()
-    ],
-
-    devtool: 'source-map'
+  devtool: 'source-map'
 });

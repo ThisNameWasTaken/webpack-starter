@@ -4,22 +4,22 @@ const commonConfig = require('./webpack.common');
 const { DefinePlugin } = require('webpack');
 
 module.exports = merge(commonConfig, {
-    mode: 'development',
+  mode: 'development',
 
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
-    },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
 
-    plugins: [
-        new DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
-        })
-    ],
+  plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
 
-    devServer: {
-        contentBase: './dist'
-    },
+  devServer: {
+    contentBase: './dist'
+  },
 
-    devtool: 'inline-source-map'
+  devtool: 'inline-source-map'
 });

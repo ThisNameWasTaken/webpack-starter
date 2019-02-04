@@ -8,18 +8,18 @@ module.exports = merge(commonConfig, {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
 
   plugins: [
     new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
   ],
 
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
 
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
 });

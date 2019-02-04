@@ -23,9 +23,14 @@ const scssPath = sassPath.replace(/\.sass$/g, '.scss');
 const htmlLoaderConfig = {
   loader: 'html-loader',
   options: {
-    attrs: [':src', ':data-src', 'source:srcset', 'source:data-srcset'], // load images from html
-    interpolate: true
-  }
+    attrs: [
+      ':src',
+      ':data-src',
+      ':srcset',
+      ':data-srcset',
+    ],
+    interpolate: true,
+  },
 };
 
 module.exports = {
@@ -33,24 +38,24 @@ module.exports = {
     main: [
       fs.existsSync(sassPath) ? sassPath : scssPath,
       'regenerator-runtime/runtime',
-      './src/js/main.js'
-    ]
+      './src/js/main.js',
+    ],
   },
 
   module: {
     rules: [{
       test: /\.html$/i,
-      use: htmlLoaderConfig
+      use: htmlLoaderConfig,
     }, {
       test: /\.pug$/i,
       use: [htmlLoaderConfig, {
-        loader: 'pug-plain-loader'
+        loader: 'pug-plain-loader',
       }]
     }, {
       test: /\.ejs$/i,
       use: [htmlLoaderConfig, {
-        loader: 'ejs-plain-loader'
-      }]
+        loader: 'ejs-plain-loader',
+      }],
     }, {
       // transpile es6 to es5
       test: /\.js$/i,
@@ -59,58 +64,58 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['@babel/preset-env', { modules: false /* allow tree shaking */ }]
+            ['@babel/preset-env', { modules: false /* allow tree shaking */ }],
           ],
           plugins: [
             '@babel/plugin-syntax-dynamic-import',
-            ['@babel/plugin-proposal-class-properties', { 'loose': true }]
-          ]
-        }
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
+          ],
+        },
       }, {
-        loader: 'eslint-loader'
-      }]
+        loader: 'eslint-loader',
+      }],
     }, {
       // transpile sass and autoprefix it
       test: /\.(sass|scss|css)$/i,
       use: [{
-        loader: IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader'
+        loader: IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
       }, {
-        loader: 'css-loader'
+        loader: 'css-loader',
       }, {
         loader: 'postcss-loader',
         options: {
           plugins: [
-            autoprefixer({ browsers: ['last 2 versions', '> 1%'] })
-          ]
-        }
+            autoprefixer({ browsers: ['last 2 versions', '> 1%'] }),
+          ],
+        },
       }, {
         loader: 'sass-loader',
         options: {
-          includePaths: ['./node_modules']
-        }
-      }]
+          includePaths: ['./node_modules'],
+        },
+      }],
     }, {
       // load images
       test: /\.(png|jpe?g|svg|gif|webp)$/i,
       use: [{
         loader: 'url-loader',
-        options: { limit: 8192 }
-      }]
-    }]
+        options: { limit: 8192 },
+      }],
+    }],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/views/index.ejs',
-      chunks: ['main']
+      chunks: ['main'],
     }),
 
     new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async'
+      defaultAttribute: 'async',
     }),
 
     new InjectManifest({
-      swSrc: './src/js/serviceWorker.js'
+      swSrc: './src/js/serviceWorker.js',
     }),
 
     new PwaManifestWebpackPlugin({
@@ -118,12 +123,12 @@ module.exports = {
       name: "Webpack Starter",
       icon: {
         src: path.resolve('src/icons/launcher-icon.png'),
-        sizes: [512, 256, 192, 152, 144, 128]
+        sizes: [512, 256, 192, 152, 144, 128],
       },
       start_url: "/index.html",
       display: "standalone",
       theme_color: "#ffedcd",
-      background_color: "#ffedcd"
-    })
-  ]
+      background_color: "#ffedcd",
+    }),
+  ],
 };

@@ -15,12 +15,12 @@ module.exports = merge(commonConfig, {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
   },
 
   optimization: {
     splitChunks: {
-      chunks: "all"
+      chunks: "all",
     },
     minimize: true,
     minimizer: [
@@ -28,14 +28,14 @@ module.exports = merge(commonConfig, {
         parallel: true,
         sourceMap: true,
       }),
-    ]
+    ],
   },
 
   plugins: [
     new CleanWebpackPlugin('dist'),
 
     new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 
     new NoEmitOnErrorsPlugin(),
@@ -47,8 +47,8 @@ module.exports = merge(commonConfig, {
 
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
-        map: { inline: false }
-      }
+        map: { inline: false },
+      },
     }),
 
     new PurgecssPlugin({
@@ -57,8 +57,8 @@ module.exports = merge(commonConfig, {
 
     new CriticalPlugin(),
 
-    new HashedModuleIdsPlugin()
+    new HashedModuleIdsPlugin(),
   ],
 
-  devtool: 'source-map'
+  devtool: 'source-map',
 });

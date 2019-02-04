@@ -114,16 +114,16 @@ module.exports = {
     }),
 
     new PwaManifestWebpackPlugin({
-      short_name: "Jokr",
-      name: "Jokr",
+      short_name: "Webpack Starter",
+      name: "Webpack Starter",
       icon: {
         src: path.resolve('src/icons/launcher-icon.png'),
         sizes: [512, 256, 192, 152, 144, 128]
       },
       start_url: "/index.html",
       display: "standalone",
-      theme_color: "#3f51b5",
-      background_color: "#3f51b5"
+      theme_color: "#ffedcd",
+      background_color: "#ffedcd"
     })
   ]
 };

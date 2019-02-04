@@ -110,7 +110,7 @@ module.exports = {
     }),
 
     new InjectManifest({
-      swSrc: './src/serviceWorker.js'
+      swSrc: './src/js/serviceWorker.js'
     }),
 
     new PwaManifestWebpackPlugin({
